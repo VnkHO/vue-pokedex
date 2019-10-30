@@ -1,17 +1,18 @@
 <template>
   <div id="home" class="home">
-    <header>
-      <h1>Test</h1>
-    </header>
+    <PokedexStarter />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import PokedexStarter from "@/components/PokedexStarter/PokedexStarter.vue";
 
 export default Vue.extend({
   name: "home",
-  components: {}
+  components: {
+    PokedexStarter
+  }
 });
 </script>
 
