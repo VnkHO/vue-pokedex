@@ -7,12 +7,12 @@ const state = {
 };
 
 const getters = {
-  GET_ALL_POKEMONS: (state) => state.pokemons
+  GET_ALL_POKEMONS: (state: any) => state.pokemons
 };
 
 const actions = {
 
-  async fetchPokemons({ state, commit }) {
+  async fetchPokemons({ state, commit }: any) {
     if (!state.pokemons['pokemons']) {
       const URL = "https://pokeapi.co/api/v2/pokemon/";
       // const limitPokemon = "?limit=151&offset=0";
@@ -29,7 +29,7 @@ const actions = {
 };
 
 const mutations = {
-  SET_POKEMONS: (state, pokemons) => state.pokemons = pokemons
+  SET_POKEMONS: (state: any, pokemons: any) => state.pokemons = pokemons
 };
 
 export default {
