@@ -16,10 +16,11 @@
           <!-- <span class='pokedex__mid-screen--reflection'></span> -->
           <div class="pokedexStarter-mid__cta">
             <button class="pokedexStarter-mid__cta--pokedex">
-              <router-link
+              <router-link class="pokedexStarter-mid__cta--pokedex--link" to="/pokedex">Pokedex</router-link>
+              <!-- <router-link
                 class="pokedexStarter-mid__cta--pokedex--link"
                 :to="{ name: 'pokedex', params: { pokemons: pokemons }}"
-              >Pokedex</router-link>
+              >Pokedex</router-link>-->
             </button>
 
             <!-- <button class="pokedexStarter-mid__cta--game">Game</button> -->
@@ -43,11 +44,11 @@ import { mapGetters, mapActions } from "vuex";
 
 export default Vue.extend({
   name: "PokedexStarter",
-  data() {
-    return {
-      pokemons: []
-    };
-  },
+  // data() {
+  //   return {
+  //     pokemons: [["GET_ALL_POKEMONS"]]
+  //   };
+  // },
   components: {},
   methods: {
     ...mapActions(["fetchPokemons"])
