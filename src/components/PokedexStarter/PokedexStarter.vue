@@ -16,7 +16,7 @@
           <!-- <span class='pokedex__mid-screen--reflection'></span> -->
           <div class="pokedexStarter-mid__cta">
             <button class="pokedexStarter-mid__cta--pokedex">
-              <router-link class="pokedexStarter-mid__cta--pokedex--link" to="/pokedex">Pokedex</router-link>
+              <router-link class="pokedexStarter-mid__cta--pokedex--link" to="/home">Enter</router-link>
               <!-- <router-link
                 class="pokedexStarter-mid__cta--pokedex--link"
                 :to="{ name: 'pokedex', params: { pokemons: pokemons }}"
@@ -40,25 +40,8 @@
 import Vue from "vue";
 import "../PokedexStarter/PokedexStarter.scss";
 
-import { mapGetters, mapActions } from "vuex";
-
 export default Vue.extend({
-  name: "PokedexStarter",
-  // data() {
-  //   return {
-  //     pokemons: [["GET_ALL_POKEMONS"]]
-  //   };
-  // },
-  components: {},
-  methods: {
-    ...mapActions(["fetchPokemons"])
-  },
-  computed: {
-    ...mapGetters(["GET_ALL_POKEMONS"])
-  },
-  created() {
-    this.fetchPokemons();
-  }
+  name: "PokedexStarter"
 });
 </script>
 

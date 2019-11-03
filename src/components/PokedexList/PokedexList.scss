@@ -1,45 +1,191 @@
 .pokedexList {
 
+  // Container
+
   &-section {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem;
+    padding: 1.4rem;
+    background-color: var(--white);
   }
-
+  
   &-container {
-    width: calc(90% / 2);
-    background-color: red;
-    padding: 1rem;
-    margin-bottom: 2rem;
+    position: relative;
+    display: flex;
+    width: calc(97% / 2);
+    height: 15rem;
+    margin-bottom: 3%;
     border-radius: 2rem;
   }
 
-  &-container__title{
-    // display: inline-flex;
-    // flex-direction: column;
+  // Information
+
+  &-information {
+
+    &__container {
+      width: 100%;
+      height: 100%;
+      padding: 3rem 2rem;
+      z-index: 2;
+    }
+    
+    &__title {
+      font-size: 2rem;
+      text-transform: capitalize;
+      color: var(--white);
+      font-weight: 900;
+      margin-bottom: 1.2rem;
+    }
+
+    &__type {
+      
+      &--container {
+        display: inline-flex;
+        flex-direction: column;
+      }
+
+      display: inline-block;
+      padding: .6rem 1.4rem;
+      font-size: 1.4rem;
+      text-align: center;
+      text-transform: capitalize;
+      color: var(--white);
+      font-weight: 600;
+      background-color: rgba(240, 240, 240, .3);
+      border-radius: 10rem;
+    }
+
+    &__type:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    &__order {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      font-size: 1.8rem;
+      color: var(--white);
+      opacity: .6;
+    }
+
   }
 
-  &-title {
-    font-size: 2.2rem;
-    color: white;
-  }
 
-  &-image {
-    background-color: green;
-    object-fit: cover;
-    // width: 30%;
+  &
+
+
+  // Image
+  
+  &-image__container {
+    position: absolute;
+    width: 100%;
     height: auto;
-    // height: 30rem;
+
+    
+    &::after {
+      content: '';
+      display: block;
+      width: auto;
+      height: 15rem;
+      background-image: url('../../assets/images/pokeball-white.svg');
+      background-size: 8rem 8rem;
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      object-fit: cover;
+    }
   }
 
-  &-type {
-    display: block;
-    width: 50%;
-    text-align: center;
-    color: white;
-    background-color: rgba(255, 255, 255, .5);
-    border-radius: 50rem;
+
+  
+  &-image {
+    position: absolute;
+    bottom: .1rem;
+    right: .1rem;
+    width: 8.5rem;
+    height: 8.5rem;
+    object-fit: cover;
+    z-index: 1;
   }
+
+  
+}
+
+// Pokemon Type Color
+
+.bug {
+  background-color: var(--bug);
+}
+
+.dark {
+  background-color: var(--dark);
+}
+
+.dragon {
+  background-color: var(--dragon);
+}
+
+.electric {
+  background-color: var(--electric);
+}
+
+.fairy {
+  background-color: var(--fairy);
+}
+
+.fighting {
+  background-color: var(--fighting);
+}
+
+.fire {
+  background-color: var(--fire);
+}
+
+.flying {
+  background-color: var(--flying);
+}
+
+.ghost {
+  background-color: var(--ghost);
+}
+
+.grass {
+  background-color: var(--grass);
+}
+
+.ground {
+  background-color: var(--ground);
+}
+
+.ice {
+  background-color: var(--ice);
+}
+
+.normal {
+  background-color: var(--normal);
+}
+
+.poison {
+  background-color: var(--poison);
+}
+
+.psychic {
+  background-color: var(--psychic);
+}
+
+.rock {
+  background-color: var(--rock);
+}
+
+.steel {
+  background-color: var(--steel);
+}
+
+.water {
+  background-color: var(--water);
+}
+
+.default {
+  background-color: var(--default);
 }

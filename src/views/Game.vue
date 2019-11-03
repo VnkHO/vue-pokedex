@@ -1,12 +1,12 @@
 <template>
-  <div id="Home" class="Home">Home</div>
+  <div id="Game" class="Game">Game</div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 
 export default Vue.extend({
-  name: "Home"
+  name: "Game"
 });
 </script>
 
