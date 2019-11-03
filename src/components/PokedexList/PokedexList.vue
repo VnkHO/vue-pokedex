@@ -1,10 +1,14 @@
 <template>
   <div id="pokedexList" class="pokedexList">
-    <h2>Pokedex</h2>
+    <h2 class="pokedexList-title">Pokedex</h2>
+    <!-- <FilterPokemons :pokemons="pokemons" style="border: 2px solid red"></FilterPokemons> -->
+    <input type="search" v-model="searchWord" required />
+    <p>getSearchWord: {{ searchWord }}</p>
+    <div v-if="pokemons.length === 0">Loading....</div>
     <section class="pokedexList-section">
       <article
         class="pokedexList-container"
-        v-for="(pokemon) in GET_ALL_POKEMONS"
+        v-for="pokemon in filteredCourses"
         :key="pokemon.name"
         :class="{
           'bug': pokemon.types[0].type.name === 'bug',
@@ -64,34 +68,82 @@
 <script lang="ts">
 import Vue from "vue";
 import PokemonItem from "@/components/PokemonItem/PokemonItem.vue";
+import FilterPokemons from "@/components/FilterPokemons/FilterPokemons.vue";
 import "../PokedexList/PokedexList.scss";
 
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapState } from "vuex";
 import pokemons from "../../store/modules/pokemons";
 
 export default Vue.extend({
   name: "PokedexList",
-  data: {},
-  mounted() {
-    // this.scroll();
+  data() {
+    return {
+      bottom: false,
+      pokemons: this.$store.state.pokemons
+      // keyword: this.$store.state.pokemons.keyword
+    };
   },
   components: {
-    PokemonItem
+    PokemonItem,
+    FilterPokemons
   },
-  methods: {},
+  methods: {
+    bottomVisible() {
+      // const scrollY = window.scrollY;
+      // const visible = document.documentElement.clientHeight;
+      // const pageHeight = document.documentElement.scrollHeight;
+      // const bottomOfPage = visible + scrollY >= pageHeight;
+      // return bottomOfPage || pageHeight < visible;
+    },
+    addPokemon() {
+      // console.log("TEST");
+      // console.log("AZFZEF", mapGetters(["GET_ALL_POKEMONS"]));
+      // console.log(this.$store.dispatch("fetchPokemons"));
+    }
+  },
   computed: {
-    ...mapGetters(["GET_ALL_POKEMONS"])
-  },
-  watch: {
-    GET_ALL_POKEMONS: {
-      handler(GET_ALL_POKEMONS) {
-        console.log("HELLO POKEMON :", GET_ALL_POKEMONS);
+    ...mapGetters(["GET_ALL_POKEMONS"]),
+    filteredCourses() {
+      try {
+        let a =
+          this.$store.getters.getFilteredCourse ||
+          this.$store.getters.allCourses;
+        console.log("BOUUFE TES MROTS :", a);
+        return a;
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    searchWord: {
+      get() {
+        return this.$store.state.searchWord;
+      },
+      set(value) {
+        console.log("MY VALUE", value);
+        this.$store.dispatch("FILTERED_COURSES", value);
       }
     }
   },
+  watch: {
+    // GET_ALL_POKEMONS: {
+    //   handler(GET_ALL_POKEMONS) {
+    //     console.log("HELLO GET_ALL_POKEMONS :", GET_ALL_POKEMONS);
+    //   }
+    // },
+    // bottom(bottom) {
+    //   if (bottom) {
+    //     this.addPokemon();
+    //   }
+    // }
+  },
   created() {
     this.$store.dispatch("fetchPokemons");
-  }
+    // window.addEventListener("scroll", () => {
+    //   this.bottom = this.bottomVisible();
+    // });
+    // this.addPokemon();
+  },
+  mounted() {}
 });
 </script>
 
