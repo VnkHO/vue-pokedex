@@ -7,10 +7,12 @@
     <div v-if="pokemons.pokemons.length === 0">Loading....</div>
     <section class="pokedexList-section">
       <article
+        v-for="(pokemon, index) in GET_ALL_POKEMONS"
         class="pokedexList-container"
-        v-for="pokemon in GET_ALL_POKEMONS"
         :key="pokemon.name"
-        :class="{
+        :class="[
+          `pokedexList-container__animation--${index + 1}`,
+          {
           'bug': pokemon.types[0].type.name === 'bug',
           'dark': pokemon.types[0].type.name === 'dark',
           'dragon': pokemon.types[0].type.name === 'dragon',
@@ -29,7 +31,7 @@
           'rock': pokemon.types[0].type.name === 'rock',
           'steel': pokemon.types[0].type.name === 'steel',
           'water': pokemon.types[0].type.name === 'water',
-          }"
+          }]"
       >
         <router-link
           class="pokedexList-link"
@@ -153,4 +155,3 @@ export default Vue.extend({
   mounted() {}
 });
 </script>
-
