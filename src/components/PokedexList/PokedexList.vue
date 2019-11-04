@@ -2,13 +2,13 @@
   <div id="pokedexList" class="pokedexList">
     <h2 class="pokedexList-title">Pokedex</h2>
     <!-- <FilterPokemons :pokemons="pokemons" style="border: 2px solid red"></FilterPokemons> -->
-    <input type="search" v-model="searchWord" required />
-    <p>getSearchWord: {{ searchWord }}</p>
-    <div v-if="pokemons.length === 0">Loading....</div>
+    <!-- <input type="search" v-model="searchWord" required />
+    <p>getSearchWord: {{ searchWord }}</p>-->
+    <div v-if="pokemons.pokemons.length === 0">Loading....</div>
     <section class="pokedexList-section">
       <article
         class="pokedexList-container"
-        v-for="pokemon in filteredCourses"
+        v-for="pokemon in GET_ALL_POKEMONS"
         :key="pokemon.name"
         :class="{
           'bug': pokemon.types[0].type.name === 'bug',
@@ -31,35 +31,41 @@
           'water': pokemon.types[0].type.name === 'water',
           }"
       >
-        <div class="pokedexList-information__container">
-          <h4 class="pokedexList-information__title">{{ pokemon.name }}</h4>
-          <div class="pokedexList-information__type--container">
+        <router-link
+          class="pokedexList-link"
+          :to="{path: `/pokedex/pokemon/${pokemon.name}`,
+          }"
+        >
+          <div class="pokedexList-information__container">
+            <h4 class="pokedexList-information__title">{{ pokemon.name }}</h4>
+            <div class="pokedexList-information__type--container">
+              <p
+                class="pokedexList-information__type"
+                v-if="pokemon.types[0]"
+              >{{ pokemon.types[0].type.name }}</p>
+              <p
+                class="pokedexList-information__type"
+                v-if="pokemon.types[1]"
+              >{{ pokemon.types[1].type.name}}</p>
+            </div>
             <p
-              class="pokedexList-information__type"
-              v-if="pokemon.types[0]"
-            >{{ pokemon.types[0].type.name }}</p>
+              class="pokedexList-information__order"
+              v-if="pokemon.id.toString().length === 1"
+            >{{ `#00${pokemon.id}` }}</p>
             <p
-              class="pokedexList-information__type"
-              v-if="pokemon.types[1]"
-            >{{ pokemon.types[1].type.name}}</p>
+              class="pokedexList-information__order"
+              v-if="pokemon.id.toString().length === 2"
+            >{{ `#0${pokemon.id}` }}</p>
+            <p
+              class="pokedexList-information__order"
+              v-if="pokemon.id.toString().length === 3"
+            >{{ `#${pokemon.id}` }}</p>
           </div>
-          <p
-            class="pokedexList-information__order"
-            v-if="pokemon.id.toString().length === 1"
-          >{{ `#00${pokemon.id}` }}</p>
-          <p
-            class="pokedexList-information__order"
-            v-if="pokemon.id.toString().length === 2"
-          >{{ `#0${pokemon.id}` }}</p>
-          <p
-            class="pokedexList-information__order"
-            v-if="pokemon.id.toString().length === 3"
-          >{{ `#${pokemon.id}` }}</p>
-        </div>
 
-        <figure class="pokedexList-image__container">
-          <img class="pokedexList-image" :src="pokemon.sprites.front_default" :alt="pokemon.name" />
-        </figure>
+          <figure class="pokedexList-image__container">
+            <img class="pokedexList-image" :src="pokemon.sprites.front_default" :alt="pokemon.name" />
+          </figure>
+        </router-link>
       </article>
     </section>
   </div>
@@ -78,8 +84,8 @@ export default Vue.extend({
   name: "PokedexList",
   data() {
     return {
-      bottom: false,
-      pokemons: this.$store.state.pokemons
+      bottom: false
+      // pokemons: this.$store.state.pokemons
       // keyword: this.$store.state.pokemons.keyword
     };
   },
@@ -102,27 +108,28 @@ export default Vue.extend({
     }
   },
   computed: {
-    ...mapGetters(["GET_ALL_POKEMONS"]),
-    filteredCourses() {
-      try {
-        let a =
-          this.$store.getters.getFilteredCourse ||
-          this.$store.getters.allCourses;
-        console.log("BOUUFE TES MROTS :", a);
-        return a;
-      } catch (e) {
-        console.log(e);
-      }
-    },
-    searchWord: {
-      get() {
-        return this.$store.state.searchWord;
-      },
-      set(value) {
-        console.log("MY VALUE", value);
-        this.$store.dispatch("FILTERED_COURSES", value);
-      }
-    }
+    ...mapState(["pokemons"]),
+    ...mapGetters(["GET_ALL_POKEMONS"])
+    // filteredCourses() {
+    //   try {
+    //     let a =
+    //       this.$store.getters.getFilteredCourse ||
+    //       this.$store.getters.allCourses;
+    //     console.log("BOUUFE TES MROTS :", a);
+    //     return a;
+    //   } catch (e) {
+    //     console.log(e);
+    //   }
+    // },
+    // searchWord: {
+    //   get() {
+    //     return this.$store.state.searchWord;
+    //   },
+    //   set(value) {
+    //     console.log("MY VALUE", value);
+    //     this.$store.dispatch("FILTERED_COURSES", value);
+    //   }
+    // }
   },
   watch: {
     // GET_ALL_POKEMONS: {

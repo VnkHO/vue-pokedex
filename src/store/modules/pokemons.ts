@@ -7,15 +7,15 @@ import { Module } from 'vuex';
 
 const state = {
   pokemons: [],
-  searchWord: null,
-  filteredCourses: null,
+  // searchWord: null,
+  // filteredCourses: null,
 }
 
 const getters = {
-  // GET_ALL_POKEMONS: (state: any) => state.pokemons,
-  allCourses: (state) => state.pokemons,
-  getSearchWord: (state: any) => state.searchWord,
-  getFilteredCourse: (state: any) => state.filteredCourses
+  GET_ALL_POKEMONS: (state: any) => state.pokemons,
+  // allCourses: (state) => state.pokemons,
+  // getSearchWord: (state: any) => state.searchWord,
+  // getFilteredCourse: (state: any) => state.filteredCourses
 
 }
 
@@ -31,13 +31,13 @@ const actions = {
         const response = await axios.get(`${URL}${i}`);
         pokemons.push(response.data)
       }
-      console.log(pokemons)
+      // console.log(pokemons)
       commit('SET_POKEMONS', await pokemons)
     }
   },
-  FILTERED_COURSES({ commit }, word) {
-    commit('FILTERED_COURSES', word)
-  }
+  // FILTERED_COURSES({ commit }, word) {
+  //   commit('FILTERED_COURSES', word)
+  // }
 
   // async filterPokemon({ commit }, event) {
   //   console.log('My event :', event)
@@ -48,19 +48,19 @@ const actions = {
 
 const mutations = {
   SET_POKEMONS: (state: any, pokemons: any) => state.pokemons = pokemons,
-  FILTERED_COURSES(state, word) {
-    if (!(word) || word === '{}') {
-      state.searchWord = null
-      state.filteredCourses = null
-    } else {
-      state.searchWord = word
-      word = word.trim().toLowerCase()
-      console.log('NIKE TAZ MERE: ', state.courses)
-      state.filteredCourses = state.pokemons.filter((course) => {
-        return course.name.toLowerCase().includes(word)
-      })
-    }
-  }
+  // FILTERED_COURSES(state, word) {
+  //   if (!(word) || word === '{}') {
+  //     state.searchWord = null
+  //     state.filteredCourses = null
+  //   } else {
+  //     state.searchWord = word
+  //     word = word.trim().toLowerCase()
+  //     console.log('NIKE TAZ MERE: ', state.courses)
+  //     state.filteredCourses = state.pokemons.filter((course) => {
+  //       return course.name.toLowerCase().includes(word)
+  //     })
+  //   }
+  // }
 };
 
 export default {
