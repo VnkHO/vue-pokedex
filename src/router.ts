@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import Pokedex from './views/Pokedex.vue';
 import Pokemon from './views/Pokemon.vue';
 import Game from './views/Game.vue';
+import Error404 from './views/Error.vue';
 import Router from 'vue-router';
 import pokemons from './store/modules/pokemons';
 
@@ -41,6 +42,11 @@ export default new Router({
       path: '/game',
       name: 'Game',
       component: Game,
+    },
+    {
+      path: '*',
+      name: 'Error',
+      component: Error404,
     }
   ],
 });
