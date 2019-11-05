@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import GamePlay from "@/components/GamePlay/GamePlay";
+import GamePlay from "@/components/GamePlay/GamePlay.vue";
 
 export default Vue.extend({
   name: "Game",

@@ -42,7 +42,10 @@ import { mapGetters } from "vuex";
 import "../PokedexStarter/PokedexStarter.scss";
 
 export default Vue.extend({
-  name: "PokedexStarter"
+  name: "PokedexStarter",
+  computed: {
+    ...mapGetters(["all_pokemons"])
+  }
 });
 </script>
 
