@@ -41,7 +41,7 @@ import PokemonType from "@/components/PokemonType/PokemonType.vue";
 
 export default {
   name: "PokemonItem",
-  data() {
+  data(this: any) {
     return {
       namePokemon: this.$route.params.name
     };
