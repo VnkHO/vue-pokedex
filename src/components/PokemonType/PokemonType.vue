@@ -15,7 +15,7 @@ export default {
     }
   },
   methods: {
-    typePokemon(id: number): any {
+    typePokemon(this: any, id: number): any {
       return this.pokemon.types[id];
     }
   }
