@@ -9,9 +9,16 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { mapGetters } from "vuex";
 
 export default Vue.extend({
-  name: "Home"
+  name: "Home",
+  created(this: any) {
+    this.$store.dispatch("fetchPokemons");
+  },
+  computed: {
+    ...mapGetters(["all_pokemons"])
+  }
 });
 </script>
 
