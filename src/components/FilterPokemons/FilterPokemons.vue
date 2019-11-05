@@ -9,10 +9,10 @@ export default {
   name: "FilterPokemons",
   computed: {
     searchWord: {
-      get() {
+      get(): string {
         return this.$store.getters.searchWord;
       },
-      set(value: string) {
+      set(value: string): any {
         this.$store.dispatch("filteredPokemons", value);
       }
     }
