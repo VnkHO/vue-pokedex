@@ -21,8 +21,12 @@ export interface Pokemon {
 
 export interface PokemonState {
   pokemons: [];
+  pokemonsSpecies: [];
+  // pokemonsGender: [];
+  byPokemon: [];
+  filteredPokemons: null;
   searchWord: string;
-  filteredCourses: null;
+  id: number;
 }
 
 export interface PokemonActions {

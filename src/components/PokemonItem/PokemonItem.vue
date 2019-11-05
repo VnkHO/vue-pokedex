@@ -1,31 +1,63 @@
 <template>
   <div id="pokemonItem" class="pokemonItem">
-    <section class="pokemonItem-section">
-      <div class="pokemonItem-container" v-for="pokemon in GET_ALL_POKEMONS" :key="pokemon.name">
-        <h4 class="pokemonItem-title">{{ pokemon.name }}</h4>
-        <img class="pokemonItem-image" :src="pokemon.sprites.front_default" :alt="pokemon.name" />
-        <!-- <router-link :to="pokemon.url">{{ pokemon.name }}</router-link> -->
-      </div>
+    <h1>Pokemon</h1>
+    <section>
+      <article v-for="pokemon in by_pokemon" :key="pokemon.name">
+        <div v-if="pokemon.name === namePokemon">
+          <h4>{{ pokemon.name }}</h4>
+          <PokemonType class="pokemonItem-Type" :pokemon="pokemon" />
+          <PokemonOrder class="pokemonItem-Order" :pokemon="pokemon" />
+          <figure class>
+            <img class :src="pokemon.sprites.front_default" :alt="pokemon.name" />
+          </figure>
+        </div>
+        <div v-if="pokemon.name === namePokemon">
+          <nav>
+            <ul>
+              <li>About</li>
+              <li>Base Stats</li>
+              <li>Evolution</li>
+              <li>Moves</li>
+            </ul>
+          </nav>
+          <div>
+            <div>
+              <p>Species: {{pokemon.species.name }}</p>
+              <p>Height: {{ pokemon.height}}</p>
+              <p>Weight: {{pokemon.weight}}</p>Species, height, weight, abilities
+            </div>
+            <div>Breeding genrder egg groups egg cycle</div>
+          </div>
+        </div>
+      </article>
     </section>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-// import { mapGetters, mapActions } from "vuex";
-import "../PokemonItem/PokemonItem.scss";
+import { mapGetters, mapActions, mapState } from "vuex";
+import PokemonOrder from "@/components/PokemonOrder/PokemonOrder.vue";
+import PokemonType from "@/components/PokemonType/PokemonType.vue";
 
-export default Vue.extend({
-  name: "PokemonItem"
-  // methods: {
-  //   ...mapActions(["fetchPokemons"])
-  // },
-  // computed: {
-  //   ...mapGetters(["GET_ALL_POKEMONS"])
-  // },
-  // created() {
-  //   this.fetchPokemons();
-  // }
-});
+export default {
+  name: "PokemonItem",
+  data() {
+    return {
+      namePokemon: this.$route.params.name
+    };
+  },
+  components: {
+    PokemonOrder,
+    PokemonType
+  },
+  computed: {
+    ...mapGetters(["get_id", "pokemon_gender", "by_pokemon"])
+  },
+  created() {
+    this.$store.dispatch("getID", this.$route.params.id);
+    this.$store.dispatch("fetchPokemonsSpecies");
+    this.$store.dispatch("fetchByPokemon");
+  }
+};
 </script>
 

@@ -1,31 +1,21 @@
 <template>
-  <div>
-    <!-- <input type="search" @keyup="$emit('filter', filterPokemon)" /> -->
-    <input type="search" v-model="filter" />
-    <div>{{ filterPokemon }}</div>
-  </div>
+  <input type="search" v-model="searchWord" />
 </template>
 
 <script lang="ts">
-// import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "FilterPokemons",
-  data() {
-    return {
-      arrPokemons: [],
-      filter: ""
-    };
-  },
   computed: {
-    filterPokemon: function() {
-      return this.arrPokemons[0].filter(pokemon => {
-        return pokemon.name === "bulbasaur";
-      });
+    searchWord: {
+      get(): any {
+        return this.$store.getters.searchWord;
+      },
+      set(value: string) {
+        this.$store.dispatch("filteredPokemons", value);
+      }
     }
-  },
-  async created() {
-    await this.arrPokemons.push(this.$attrs.pokemons.pokemons);
   }
 };
 </script>

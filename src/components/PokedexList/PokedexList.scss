@@ -1,8 +1,25 @@
 .pokedexList {
 
+  padding: 4rem 1.4rem;
+  background-color: var(--white);
+
   &-title {
-    font-size: 3.2rem;
+    font-size: 4.2rem;
     font-weight: 900;
+    margin-bottom: 4rem;
+  }
+
+  &-input--filter {
+
+    font-size: 1.8rem;
+    color: var(--black);
+    width: 100%;
+    padding: 1rem 2rem;
+    margin-bottom: 4rem;
+    border-radius: 10rem;
+    border: none;
+    background-color: rgba(170,179,199, .4);
+    outline: none;
   }
 
   &-back {
@@ -25,8 +42,8 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 1.4rem;
-    background-color: var(--white);
+    // padding: 1.4rem;
+    // background-color: var(--white);
   }
   
   &-container {
@@ -56,7 +73,7 @@
       padding: 3rem 2rem;
       z-index: 2;
     }
-    
+
     &__title {
       font-size: 2rem;
       text-transform: capitalize;
@@ -64,14 +81,13 @@
       font-weight: 900;
       margin-bottom: 1.2rem;
     }
+  }
 
-    &__type {
-      
-      &--container {
-        display: inline-flex;
-        flex-direction: column;
-      }
+  &-Type {
+    display: inline-flex;
+    flex-direction: column;
 
+    & > p {
       display: inline-block;
       padding: .6rem 1.4rem;
       font-size: 1.4rem;
@@ -81,36 +97,30 @@
       font-weight: 600;
       background-color: rgba(240, 240, 240, .3);
       border-radius: 10rem;
+      
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
     }
-
-    &__type:not(:last-child) {
-      margin-bottom: 1rem;
-    }
-
-    &__order {
-      position: absolute;
-      top: 1.2rem;
-      right: 1.2rem;
-      font-size: 1.8rem;
-      color: var(--white);
-      opacity: .6;
-    }
-
   }
 
-
-  &
-
+  &-Order > p {    
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    font-size: 1.8rem;
+    color: var(--white);
+    opacity: .6;
+  }
 
   // Image
-  
-  &-image__container {
+
+  &-Image {
     position: absolute;
     width: 100%;
     height: auto;
     z-index: 20;
 
-    
     &::after {
       content: '';
       display: block;
@@ -123,21 +133,17 @@
       object-fit: cover;
       z-index: 10;
     }
+
+    & > img {
+      position: absolute;
+      bottom: .1rem;
+      right: .1rem;
+      width: 8.5rem;
+      height: 8.5rem;
+      object-fit: cover;
+      z-index: 10;
+    }
   }
-
-
-  
-  &-image {
-    position: absolute;
-    bottom: .1rem;
-    right: .1rem;
-    width: 8.5rem;
-    height: 8.5rem;
-    object-fit: cover;
-    z-index: 10;
-  }
-
-  
 }
 
 // Animation Loops Card Pokemon

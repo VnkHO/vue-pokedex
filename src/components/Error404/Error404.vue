@@ -12,9 +12,7 @@
       </div>
     </div>
     <p class="Error-title--secondary">Sorry, we can't find the page.</p>
-    <button class="Error-link--btn">
-      <a class="Error-link" @click="$router.go(-1)">Go back</a>
-    </button>
+    <a class="Error-link" @click="$router.go(-1)">Go back</a>
   </div>
 </template>
 
@@ -23,8 +21,8 @@ import Vue from "vue";
 
 import "../Error404/Error404.scss";
 
-export default Vue.extend({
+export default {
   name: "Error404"
-});
+};
 </script>
 

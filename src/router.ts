@@ -6,7 +6,6 @@ import Pokemon from './views/Pokemon.vue';
 import Game from './views/Game.vue';
 import Error404 from './views/Error.vue';
 import Router from 'vue-router';
-import pokemons from './store/modules/pokemons';
 
 Vue.use(Router);
 
@@ -30,13 +29,9 @@ export default new Router({
       component: Pokedex,
     },
     {
-      path: '/pokedex/pokemon/:name',
+      path: '/pokedex/pokemon/:name/:id',
       name: 'Pokemon',
       component: Pokemon,
-      props: (route) => ({
-        pokemon: pokemons,
-        ...route.params
-      })
     },
     {
       path: '/game',

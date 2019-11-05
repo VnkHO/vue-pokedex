@@ -1,8 +1,11 @@
 <template>
   <div id="pokedexList" class="pokedexList">
     <h2 class="pokedexList-title">Pokedex</h2>
-    <input type="search" v-model="searchWord" />
-    <p>{{ searchWord }}</p>
+    <FilterPokemons
+      class="pokedexList-input--filter"
+      aria-placeholder="Search your pokemon..."
+      placeholder="Search your pokemon..."
+    />
     <div v-if="all_pokemons.length === 0">Loading....</div>
     <section v-else class="pokedexList-section">
       <article
@@ -15,38 +18,15 @@
       >
         <router-link
           class="pokedexList-link"
-          :to="{path: `/pokedex/pokemon/${pokemon.name}`,
+          :to="{path: `/pokedex/pokemon/${pokemon.name}/${pokemon.id}`,
           }"
         >
           <div class="pokedexList-information__container">
             <h4 class="pokedexList-information__title">{{ pokemon.name }}</h4>
-            <div class="pokedexList-information__type--container">
-              <p
-                class="pokedexList-information__type"
-                v-if="pokemon.types[0]"
-              >{{ pokemon.types[0].type.name }}</p>
-              <p
-                class="pokedexList-information__type"
-                v-if="pokemon.types[1]"
-              >{{ pokemon.types[1].type.name}}</p>
-            </div>
-            <p
-              class="pokedexList-information__order"
-              v-if="pokemon.id.toString().length === 1"
-            >{{ `#00${pokemon.id}` }}</p>
-            <p
-              class="pokedexList-information__order"
-              v-if="pokemon.id.toString().length === 2"
-            >{{ `#0${pokemon.id}` }}</p>
-            <p
-              class="pokedexList-information__order"
-              v-if="pokemon.id.toString().length === 3"
-            >{{ `#${pokemon.id}` }}</p>
+            <PokemonType class="pokedexList-Type" :pokemon="pokemon" />
+            <PokemonOrder class="pokedexList-Order" :pokemon="pokemon" />
           </div>
-
-          <figure class="pokedexList-image__container">
-            <img class="pokedexList-image" :src="pokemon.sprites.front_default" :alt="pokemon.name" />
-          </figure>
+          <PokemonImage :pokemon="pokemon" class="pokedexList-Image" />
         </router-link>
       </article>
     </section>
@@ -54,25 +34,31 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import PokemonItem from "@/components/PokemonItem/PokemonItem.vue";
 import FilterPokemons from "@/components/FilterPokemons/FilterPokemons.vue";
+import PokemonOrder from "@/components/PokemonOrder/PokemonOrder.vue";
+import PokemonType from "@/components/PokemonType/PokemonType.vue";
+import PokemonImage from "@/components/PokemonImage/PokemonImage.vue";
+
 import "../PokedexList/PokedexList.scss";
 
 import { mapGetters, mapActions, mapState } from "vuex";
-import pokemons from "../../store/modules/pokemons";
 
-export default Vue.extend({
+export default {
   name: "PokedexList",
   data() {
     return {};
   },
   components: {
-    PokemonItem,
-    FilterPokemons
+    FilterPokemons,
+    PokemonOrder,
+    PokemonType,
+    PokemonImage
+  },
+  created() {
+    this.$store.dispatch("fetchPokemons");
   },
   methods: {
-    renderClass: function(type: any) {
+    renderClass: function(type: any): string {
       return `
           'bug': ${type} === 'bug',
           'dark': ${type} === 'dark',
@@ -96,22 +82,7 @@ export default Vue.extend({
     }
   },
   computed: {
-    ...mapGetters(["all_pokemons", "filters_pokemons"]),
-    searchWord: {
-      get(): any {
-        return this.$store.getters.searchWord;
-      },
-      set(value: string) {
-        this.$store.dispatch("FILTERED_POKEMON", value);
-      }
-    }
-  },
-  watch: {},
-  created() {
-    this.$store.dispatch("fetchPokemons");
-  },
-  mounted() {
-    console.log(" Gros test :", this.$store.getters.filteredPokemons);
+    ...mapGetters(["all_pokemons", "filters_pokemons"])
   }
-});
+};
 </script>
