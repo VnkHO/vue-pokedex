@@ -9,7 +9,7 @@ export default {
   name: "FilterPokemons",
   computed: {
     searchWord: {
-      get(): any {
+      get() {
         return this.$store.getters.searchWord;
       },
       set(value: string) {
