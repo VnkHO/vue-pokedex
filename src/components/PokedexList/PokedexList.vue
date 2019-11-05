@@ -54,7 +54,7 @@ export default {
     PokemonType,
     PokemonImage
   },
-  created() {
+  created(this: any) {
     this.$store.dispatch("fetchPokemons");
   },
   methods: {
