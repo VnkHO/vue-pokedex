@@ -53,7 +53,7 @@ export default {
   computed: {
     ...mapGetters(["get_id", "pokemon_gender", "by_pokemon"])
   },
-  created() {
+  created(this: any) {
     this.$store.dispatch("getID", this.$route.params.id);
     this.$store.dispatch("fetchPokemonsSpecies");
     this.$store.dispatch("fetchByPokemon");
