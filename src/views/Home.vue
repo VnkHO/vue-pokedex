@@ -11,7 +11,7 @@
 import Vue from "vue";
 import { mapGetters } from "vuex";
 
-export default Vue.extend({
+export default {
   name: "Home",
   created(this: any) {
     this.$store.dispatch("fetchPokemons");
@@ -19,7 +19,7 @@ export default Vue.extend({
   computed: {
     ...mapGetters(["all_pokemons"])
   }
-});
+};
 </script>
 
 <style scoped>

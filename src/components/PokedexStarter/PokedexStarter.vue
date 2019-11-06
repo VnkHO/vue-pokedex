@@ -40,8 +40,8 @@
 import Vue from "vue";
 import "../PokedexStarter/PokedexStarter.scss";
 
-export default Vue.extend({
+export default {
   name: "PokedexStarter"
-});
+};
 </script>
 
